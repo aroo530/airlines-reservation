@@ -1,11 +1,14 @@
 const { UserOperations } = require("../models/users");
 const { verifyToken } = require("../middleware/verifyToken");
+
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
+
+dotenv.config();
+
 const ROUNDS = Number(process.env.SALT_ROUNDS);
 const BCRYPT_PASSWORD = String(process.env.BCRYPT_PASSWORD);
-dotenv.config();
 
 const operations = new UserOperations();
 
@@ -28,6 +31,7 @@ const getUser = async (req, res) => {
 const createUser = async (req, res) => {
   try {
     let tempUser = req.body;
+
     tempUser.password = await bcrypt.hash(
       tempUser.password + BCRYPT_PASSWORD,
       ROUNDS
@@ -47,6 +51,7 @@ const login = async (req, res) => {
     const { first_name, password } = req.body;
     //find user
     const result = await operations.getUsers();
+
     const userFound = result.find((user) => {
       return user.first_name === first_name;
     });
@@ -73,6 +78,7 @@ const login = async (req, res) => {
 };
 
 const userOperaionsRoutes = (app) => {
+  //localhost:3000/users/ahmed
   app.get("/users/:name", verifyToken, getUser);
   app.get("/users", verifyToken, getUsers);
   app.post("/users/signup", createUser);
