@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-
+const fs = require("fs");
 const { userOperaionsRoutes } = require("./handlers/userHandler");
 const { flightOperaionsRoutes } = require("./handlers/flightsHandler");
 
@@ -17,9 +17,12 @@ app.get("/", (_req, res) => {
 });
 
 userOperaionsRoutes(app);
-
 flightOperaionsRoutes(app);
 
 app.listen(port, host, () => {
   console.log(`Server running at http://${host}:${port}/`);
+  fs.appendFile("time.txt", Date() + "\n", function (err) {
+    if (err) throw err;
+    console.log("Saved!");
+  });
 });

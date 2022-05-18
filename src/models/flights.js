@@ -1,9 +1,17 @@
 const pool = require("../database");
+const fs = require("fs");
+const { stringify } = require("querystring");
 
 class FlightOperaions {
   async createFlight(flight) {
     try {
+      fs.appendFile("queryLog.txt", stringify(flight)+"\n", function (err) {
+        if (err) throw err;
+        console.log("Saved!");
+      });
+
       const connection = await pool.connect();
+
       const result = await connection.query(
         "INSERT INTO flights (from_airport, to_airport, date, time, price) VALUES ($1, $2, $3, $4, $5) RETURNING *",
         [
