@@ -1,3 +1,4 @@
+-- for trip airplane many to many
 CREATE TABLE IF NOT EXISTS Flight (
     Flight_id integer NOT NULL,
     Plane_id integer NOT NULL,
