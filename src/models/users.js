@@ -1,6 +1,7 @@
 const pool = require("../database");
 
 class UserOperations {
+  
   async getUsers() {
     try {
       const connection = await pool.connect();

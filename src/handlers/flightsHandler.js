@@ -16,8 +16,7 @@ const createFlight = async (req, res) => {
 
 const getFlightByDest = async (req, res) => {
   try {
-    const to = req.query.to;
-    const from = req.query.from;
+    const { to, from } = req.body;
     const result = await operations.getFlightByDest(from, to);
     // 200 - ok
     res.status(200).json(result);

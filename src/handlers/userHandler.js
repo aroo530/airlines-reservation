@@ -20,6 +20,7 @@ const getUsers = async (_req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 const getUser = async (req, res) => {
   try {
     const result = await operations.getUser(req.params.name);
