@@ -26,11 +26,11 @@ class UserOperations {
     try {
       const connection = await pool.connect();
       const result = await connection.query(
-        "INSERT INTO users (name, password, SSN, address, phone, country) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+        "INSERT INTO users (name, password, email, address, phone, country) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
         [
           user.name,
           user.password,
-          user.SSN,
+          user.email,
           user.address,
           user.phone,
           user.country,

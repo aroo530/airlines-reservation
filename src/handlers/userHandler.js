@@ -48,12 +48,12 @@ const createUser = async (req, res) => {
 
 const login = async (req, res) => {
   try {
-    const { first_name, password } = req.body;
+    const { name, password } = req.body;
     //find user
     const result = await operations.getUsers();
 
     const userFound = result.find((user) => {
-      return user.first_name === first_name;
+      return user.name === name;
     });
 
     // console.log(userFound);
@@ -65,7 +65,7 @@ const login = async (req, res) => {
       );
       // console.log(isPasswordCorrect);
       if (isPasswordCorrect) {
-        res.json(await createToken(userFound));
+        res.status(200).json(await createToken(userFound));
       } else {
         res.status(401).json("Password is incorrect");
       }

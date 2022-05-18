@@ -1,12 +1,12 @@
 const express = require("express");
-
+const cors = require("cors");
 const bodyParser = require("body-parser");
 
 const { userOperaionsRoutes } = require("./handlers/userHandler");
 const { flightOperaionsRoutes } = require("./handlers/flightsHandler");
 
 const app = express();
-
+app.use(cors());
 const port = process.env.PORT || 3000;
 const host = process.env.HOST || "localhost";
 
