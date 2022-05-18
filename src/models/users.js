@@ -1,7 +1,19 @@
 const pool = require("../database");
 
 class UserOperations {
-  
+  async changePassword(user) {
+    try {
+      const { name, password } = user;
+      const result = await pool.query(
+        "UPDATE users SET password = $1 WHERE name = $2",
+        [password, name]
+      );
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async getUsers() {
     try {
       const connection = await pool.connect();

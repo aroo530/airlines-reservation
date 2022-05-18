@@ -11,7 +11,15 @@ const ROUNDS = Number(process.env.SALT_ROUNDS);
 const BCRYPT_PASSWORD = String(process.env.BCRYPT_PASSWORD);
 
 const operations = new UserOperations();
-
+const changePassword = async (req, res) => {
+  try {
+    const { name, password } = req.body;
+    const result = await operations.changePassword(name, password);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 const getUsers = async (_req, res) => {
   try {
     const result = await operations.getUsers();
