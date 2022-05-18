@@ -90,6 +90,7 @@ const userOperaionsRoutes = (app) => {
   //localhost:3000/users/ahmed
   app.get("/users/:name", verifyToken, getUser);
   app.get("/users", verifyToken, getUsers);
+  app.put("/users/changepassword/:name", verifyToken, changePassword);
   app.post("/users/signup", createUser);
   app.post("/users/login", login);
 };
