@@ -5,7 +5,7 @@ class UserOperations {
     try {
       const { name, password } = user;
       const result = await pool.query(
-        "UPDATE users SET password = $1 WHERE name = $2",
+        "UPDATE Person SET password = $1 WHERE name = $2",
         [password, name]
       );
       return result;
@@ -17,7 +17,7 @@ class UserOperations {
   async getUsers() {
     try {
       const connection = await pool.connect();
-      const result = await connection.query("SELECT * FROM users");
+      const result = await connection.query("SELECT * FROM Person");
       return result.rows;
     } catch (error) {
       throw error;
@@ -27,7 +27,7 @@ class UserOperations {
     try {
       const connection = await pool.connect();
       const result = await connection.query(
-        "SELECT * FROM users WHERE name = $1 ",
+        "SELECT * FROM Person WHERE name = $1 ",
         [name]
       );
       return result;
@@ -39,7 +39,7 @@ class UserOperations {
     try {
       const connection = await pool.connect();
       const result = await connection.query(
-        "INSERT INTO users (name, password, email, address, phone, country) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+        "INSERT INTO Person (name, password, email, address, phone, country) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
         [
           user.name,
           user.password,
