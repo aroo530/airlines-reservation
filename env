@@ -1,0 +1,8 @@
+ENV ='dev' 
+POSTGRES_HOST = 'localhost'
+POSTGRES_USER = 'flyadmin'
+POSTGRES_PASSWORD = "flyAdmin"
+POSTGRES_DB = 'airlines'
+BCRYPT_PASSWORD = 'my-super-strong-bcrypt-password'
+SALT_ROUNDS = 12
+TOKEN_SECRET = 'super-duper-secret-token'
