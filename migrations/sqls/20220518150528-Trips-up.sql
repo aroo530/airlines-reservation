@@ -9,6 +9,6 @@ CREATE TABLE IF NOT EXISTS Trips (
     Destination text COLLATE pg_catalog.default NOT NULL,
     Departure_airport text COLLATE pg_catalog.default NOT NULL,
     Arrival_aiport text COLLATE pg_catalog.default NOT NULL,
-    CONSTRAINT Trips_pkey PRIMARY KEY (Trip_id),
-    CONSTRAINT tr3 FOREIGN KEY (Airline_id) REFERENCES Airline (Airline_id)
+    CONSTRAINT Trips_pkey PRIMARY KEY (Trip_id)
+    -- CONSTRAINT tr3 FOREIGN KEY (Airline_id) REFERENCES Airline (Airline_id)
 );
