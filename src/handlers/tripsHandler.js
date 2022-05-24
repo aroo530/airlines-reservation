@@ -35,7 +35,11 @@ const deleteTripById = async (req, res) => { //:trip_id
 const getAllTrips = async (req, res) => { // /?source=""&destination=""
     try {
         const { source, destination } = req.query;
-        const result = await operations.getAllTrips(source, destination);
+        let result;
+        if (!source && !destination)
+            result = await operations.getAllTrips();
+        else
+            result = await operations.getSubTrips(source, destination);
         res.status(200).json(result);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -45,7 +49,7 @@ const getAllTrips = async (req, res) => { // /?source=""&destination=""
 const getTripById = async (req, res) => { //:trip_id
     try {
         const result = await operations.getTripById(req.params.trip_id);
-        res.status(200).json(result.rows);
+        res.status(200).json(result);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

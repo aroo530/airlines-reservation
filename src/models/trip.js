@@ -40,22 +40,16 @@ class TripOperations {
         }
     }
 
-    async getAllTrips(source, destination) {
+    async getAllTrips() {
         try {
-            const connection = await pool.connect();
-            let query = "SELECT * FROM Trips";
-            if(source && destination)
-                query += " where Source Like $1 And Destination like $2";
-            query += " Order by Departure_date,Daparture_time,Arrival_date,Arrival_time";
-
-            const result = await connection.query(
-                query,
-                (source && destination)? [ source, destination ]: []
-            );
-            connection.release();
-            return result.rows;
+          const connection = await pool.connect();
+          const result = await connection.query(
+            "SELECT * FROM Trips Order by Departure_date,Daparture_time,Arrival_date,Arrival_time"
+          );
+          connection.release();
+          return result.rows;
         } catch (error) {
-            throw error;
+          throw error;
         }
     }
     
@@ -67,9 +61,23 @@ class TripOperations {
               [Trip_id]
             );
             connection.release();
-            return result;
+            return result.rows;
         } catch (error) {
             throw error;
+        }
+    }
+
+    async getSubTrips(source, destination) {
+        try {
+          const connection = await pool.connect();
+          const result = await connection.query(
+            "SELECT * FROM Trips WHERE Source Like $1 And Destination like $2 Order by Departure_date,Daparture_time,Arrival_date,Arrival_time",
+            [source, destination]
+          );
+          connection.release();
+          return result.rows;
+        } catch (error) {
+          throw error;
         }
     }
 }
