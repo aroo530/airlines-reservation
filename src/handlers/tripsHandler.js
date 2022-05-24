@@ -1,4 +1,5 @@
 const { TripOperations } = require("../models/trip");
+const { verifyToken } = require("../middleware/verifyToken");
 
 const operations = new TripOperations();
 
@@ -75,8 +76,8 @@ const flightOperaionsRoutes = (app) => {
   app.post("/flights/", createFlight);
   app.delete("/flights/:trip_id/", deleteFlightById);
   // app.get("/flights/", getAllFlights);
-  app.get("/flights/:trip_id/", getFlightById);
-  app.get("/flights/", getSubFlights);
+  app.get("/flights/:trip_id/",verifyToken, getFlightById);
+  app.get("/flights/",verifyToken, getSubFlights);
 };
 
 exports.flightOperaionsRoutes = flightOperaionsRoutes;
