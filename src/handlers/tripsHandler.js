@@ -1,4 +1,4 @@
-const { TripOperations } = require("../models/flights");
+const { TripOperations } = require("../models/trip");
 
 const operations = new TripOperations();
 
@@ -16,6 +16,7 @@ const createFlight = async (req, res) => {
       Departure_airport: req.body.Departure_airport,
       Arrival_aiport: req.body.Arrival_aiport,
     };
+    console.log(trip);
     const result = await operations.createFlight(trip);
     res.status(200).json(result);
   } catch (error) {
@@ -65,6 +66,7 @@ const getSubFlights = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
+
 };
 
 const flightOperaionsRoutes = (app) => {
