@@ -5,6 +5,7 @@ const operations = new TripOperations();
 const createFlight = async (req, res) => {
   try {
     const trip = {
+      Price: req.body.Price,
       Trip_id: req.body.Trip_id,
       Airline_id: req.body.Airline_id,
       Departure_date: req.body.Departure_date,

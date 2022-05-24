@@ -48,7 +48,7 @@ const createUser = async (req, res) => {
     //we pass the user object to the createUser function to save user in the database
     const newUser = await operations.createUser(tempUser);
     // console.log(tempUser);
-    // console.log(newUser);
+    console.log(newUser);
     res.status(201).json(await createToken(newUser));
   } catch (error) {
     res.status(500).json({ message: error });

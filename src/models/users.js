@@ -39,8 +39,9 @@ class UserOperations {
     try {
       const connection = await pool.connect();
       const result = await connection.query(
-        "INSERT INTO Person (name, password, email, address, phone, country) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+        "INSERT INTO Person (SSN, name, password, email, address, phone, country) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
         [
+          user.SSN,
           user.name,
           user.password,
           user.email,

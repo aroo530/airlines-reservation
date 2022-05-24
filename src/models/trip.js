@@ -5,8 +5,9 @@ class TripOperations {
     try {
       const connection = await pool.connect();
       const result = await connection.query(
-        "INSERT INTO Trips (Trip_id, Airline_id, Departure_date, Daparture_time, Arrival_date, Arrival_time, Source, Destination, Departure_airport, Arrival_aiport) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *",
+        "INSERT INTO Trips (Price,Trip_id, Airline_id, Departure_date, Daparture_time, Arrival_date, Arrival_time, Source, Destination, Departure_airport, Arrival_aiport) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *",
         [
+          trip.Price,
           trip.Trip_id,
           trip.Airline_id,
           trip.Departure_date,
