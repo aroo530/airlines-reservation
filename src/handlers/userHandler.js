@@ -20,6 +20,7 @@ const changePassword = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 const getUsers = async (_req, res) => {
   try {
     const result = await operations.getUsers();
@@ -37,6 +38,7 @@ const getUser = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 const createUser = async (req, res) => {
   try {
     let tempUser = req.body;

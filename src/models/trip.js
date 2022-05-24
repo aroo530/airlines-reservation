@@ -1,7 +1,7 @@
 const pool = require("../database");
 
 class TripOperations {
-    async createFlight(trip) {
+    async createTrip(trip) {
         try {
             const connection = await pool.connect();
             const result = await connection.query(
@@ -26,7 +26,7 @@ class TripOperations {
         }
     }
         
-    async deleteFlightById(Trip_id) {
+    async deleteTripById(Trip_id) {
         try {
             const connection = await pool.connect();
             const result = await connection.query(
@@ -40,11 +40,17 @@ class TripOperations {
         }
     }
 
-    async getAllFlights() {
+    async getAllTrips(source, destination) {
         try {
             const connection = await pool.connect();
+            let query = "SELECT * FROM Trips";
+            if(source && destination)
+                query += " where Source Like $1 And Destination like $2";
+            query += " Order by Departure_date,Daparture_time,Arrival_date,Arrival_time";
+
             const result = await connection.query(
-                  "SELECT * FROM Trips Order by Departure_date,Daparture_time,Arrival_date,Arrival_time"
+                query,
+                (source && destination)? [ source, destination ]: []
             );
             connection.release();
             return result.rows;
@@ -53,27 +59,12 @@ class TripOperations {
         }
     }
     
-    async getFlightById(Trip_id) {
+    async getTripById(Trip_id) {
         try {
             const connection = await pool.connect();
             const result = await connection.query(
               "SELECT * FROM Trips WHERE Trip_id = $1 ",
               [Trip_id]
-            );
-            connection.release();
-            return result;
-        } catch (error) {
-            throw error;
-        }
-    }
-        
-
-    async getSubFlights(source, destination) {
-        try {
-            const connection = await pool.connect();
-            const result = await connection.query(
-              "Select * From Trips where Source Like $1 And Destination like $2 Order by Departure_date,Daparture_time,Arrival_date,Arrival_time",
-              [source, destination]
             );
             connection.release();
             return result;

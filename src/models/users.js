@@ -23,6 +23,7 @@ class UserOperations {
       throw error;
     }
   }
+
   async getUser(name) {
     try {
       const connection = await pool.connect();
@@ -35,6 +36,7 @@ class UserOperations {
       throw error;
     }
   }
+  
   async createUser(user) {
     try {
       const connection = await pool.connect();

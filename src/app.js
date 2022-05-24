@@ -3,7 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const fs = require("fs");
 const { userOperaionsRoutes } = require("./handlers/userHandler");
-const { flightOperaionsRoutes } = require("./handlers/flightsHandler");
+const { tripsOperaionsRoutes } = require("./handlers/tripsHandler");
 
 const app = express();
 app.use(cors());
@@ -17,7 +17,7 @@ app.get("/", (_req, res) => {
 });
 
 userOperaionsRoutes(app);
-flightOperaionsRoutes(app);
+tripsOperaionsRoutes(app);
 
 app.listen(port, host, () => {
   console.log(`Server running at http://${host}:${port}/`);
