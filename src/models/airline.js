@@ -6,7 +6,7 @@ class AirlineOperations {
     try {
       const connection = await pool.connect();
       const result = await connection.query(
-        "INSERT INTO Airlines (Airline_id, Airline_name, Airline_email, Airline_phone) VALUES ($1, $2, $3, $4) RETURNING *",
+        "INSERT INTO Airline (Airline_id, Airline_name, Airline_email, Airline_phone) VALUES ($1, $2, $3, $4) RETURNING *",
         [
           airline.Airline_id,
           airline.Airline_name,

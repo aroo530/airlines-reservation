@@ -73,7 +73,7 @@ const flightOperaionsRoutes = (app) => {
   //localhost:3000/flights/20
   app.post("/flights/", createFlight);
   app.delete("/flights/:trip_id/", deleteFlightById);
-  app.get("/flights/", getAllFlights);
+  // app.get("/flights/", getAllFlights);
   app.get("/flights/:trip_id/", getFlightById);
   app.get("/flights/", getSubFlights);
 };
