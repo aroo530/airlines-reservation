@@ -50,11 +50,9 @@ const getFlightById = async (req, res) => { //:trip_id
     }
 };
 
-const getSubFlights = async (req, res) => { //:source/:distination
+const getSubFlights = async (req, res) => { //:source/:destination
     try {
-        // const { source, destination } = req.params;
-        const source = req.params.source;
-        const destination = req.params.destination;
+		const { source, destination } = req.query;
         const result = await operations.getSubFlights(source, destination);
         res.status(200).json(result.rows);
     } catch (error) {
