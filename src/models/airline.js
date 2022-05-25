@@ -25,9 +25,10 @@ class AirlineOperations {
     try {
       const connection = await pool.connect();
       const result = await connection.query(
-        "Delete From Airlines where Airline_id = $1",
+        "Delete From Airline where Airline_id = $1",
         [Airline_id]
       );
+      console.log(result);
       connection.release();
       return result;
     } catch (error) {
@@ -39,7 +40,7 @@ class AirlineOperations {
     try {
       const connection = await pool.connect();
       const result = await connection.query(
-        "SELECT * FROM Airlines Order by Airline_name"
+        "SELECT * FROM Airline Order by Airline_name"
       );
       connection.release();
       return result.rows;
@@ -52,7 +53,7 @@ class AirlineOperations {
     try {
       const connection = await pool.connect();
       const result = await connection.query(
-        "SELECT * FROM Airlines WHERE Airline_id = $1 ",
+        "SELECT * FROM Airline WHERE Airline_id = $1 ",
         [Airline_id]
       );
       connection.release();
@@ -66,7 +67,7 @@ class AirlineOperations {
     try {
       const connection = await pool.connect();
       const result = await connection.query(
-        "UPDATE Airlines SET Airline_name = $1, Airline_email = $2, Airline_phone = $3 WHERE Airline_id = $4 RETURNING *",
+        "UPDATE Airline SET Airline_name = $1, Airline_email = $2, Airline_phone = $3 WHERE Airline_id = $4 RETURNING *",
         [
           airline.Airline_name,
           airline.Airline_email,
