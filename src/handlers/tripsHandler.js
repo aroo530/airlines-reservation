@@ -18,7 +18,6 @@ const createFlight = async (req, res) => {
       Departure_airport: req.body.Departure_airport,
       Arrival_aiport: req.body.Arrival_aiport,
     };
-    console.log(trip);
     const result = await operations.createFlight(trip);
     res.status(200).json(result);
   } catch (error) {
@@ -62,7 +61,6 @@ const getSubFlights = async (req, res) => {
     //localhost:3000/flights/?source=delhi&destination=mumbai
     const source = req.query.source;
     const destination = req.query.destination;
-    console.log(source, destination);
     const result = await operations.getSubFlights(source, destination);
     res.status(200).json(result.rows);
   } catch (error) {
